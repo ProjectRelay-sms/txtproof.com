@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TxtProof — Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0D1F3C;
+      --blue: #2563EB;
+      --gold: #D4A647;
+      --gray: #6B7280;
+      --light: #F8FAFC;
+      --border: #E2E8F0;
+      --white: #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      min-height: 100vh;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── HOME ── */
+    #page-home {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #page-home::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .home-content { position: relative; z-index: 1; }
+
+    .wordmark {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3.5rem, 12vw, 8rem);
+      color: var(--white);
+      letter-spacing: -3px;
+      line-height: 1;
+      margin-bottom: 28px;
+    }
+
+    .wordmark span { color: var(--gold); }
+
+    .coming-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      padding: 12px 28px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
+
+    .home-footer {
+      position: absolute;
+      bottom: 28px;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .home-footer a {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+      letter-spacing: 0.3px;
+    }
+
+    .home-footer a:hover { color: rgba(255,255,255,0.55); }
+
+    /* ── LEGAL PAGES ── */
+    #page-privacy, #page-terms { min-height: 100vh; background: var(--white); }
+
+    .legal-nav {
+      background: var(--navy);
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      cursor: pointer;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: var(--gold); }
+
+    .back-link {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: rgba(255,255,255,0.7); }
+
+    .legal-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+    }
+
+    .legal-body h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.875rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .legal-body .meta {
+      font-size: 0.78rem;
+      color: var(--gray);
+      margin-bottom: 36px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-body h2 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 28px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .legal-body p {
+      font-size: 0.875rem;
+      color: #374151;
+      line-height: 1.85;
+      margin-bottom: 12px;
+    }
+
+    .legal-body ul {
+      margin: 6px 0 12px 18px;
+    }
+
+    .legal-body ul li {
+      font-size: 0.875rem;
+      color: #374151;
+      line-height: 1.85;
+      margin-bottom: 4px;
+    }
+
+    .contact-box {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-top: 28px;
+      font-size: 0.85rem;
+      color: #374151;
+      line-height: 1.8;
+    }
+
+    .legal-footer {
+      text-align: center;
+      padding: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+
+    .legal-footer a {
+      color: var(--blue);
+      text-decoration: none;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+
+    @media (max-width: 600px) {
+      .legal-nav { padding: 16px 20px; }
+      .legal-body { padding: 40px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HOME -->
+  <div id="page-home" class="page active">
+    <div class="home-content">
+      <div class="wordmark">Txt<span>Proof</span></div>
+      <div class="coming-soon">
+        <div class="dot"></div>
+        Coming Soon
+      </div>
+    </div>
+    <div class="home-footer">
+      <a onclick="showPage('privacy')">Privacy Policy</a>
+      <a onclick="showPage('terms')">Terms & Conditions</a>
+      <a href="mailto:jacob@theharvemail.com">Contact</a>
+    </div>
+  </div>
+
+  <!-- PRIVACY -->
+  <div id="page-privacy" class="page">
+    <div class="legal-nav">
+      <span class="logo" onclick="showPage('home')">Txt<span>Proof</span></span>
+      <span class="back-link" onclick="showPage('home')">← Back</span>
+    </div>
+    <div class="legal-body">
+      <h1>Privacy Policy</h1>
+      <p class="meta">Last Updated: March 24, 2026 &nbsp;|&nbsp; Effective Date: March 24, 2026</p>
+
+      <p>TxtProof ("we," "us," or "our"), operated by Salveo Capital LLC, is committed to protecting the privacy of our users and their clients. This Privacy Policy describes how we collect, use, store, and protect information in connection with the TxtProof SMS archiving platform ("the Service").</p>
+
+      <h2>1. Information We Collect</h2>
+      <ul>
+        <li><strong>Account Information:</strong> Name, email address, phone number, and business information provided during registration.</li>
+        <li><strong>SMS Message Content:</strong> The content of SMS messages sent to and from your TxtProof number, including sender/recipient phone numbers, message body, and timestamp.</li>
+        <li><strong>Phone Numbers:</strong> Mobile phone numbers of end-users who send messages to your TxtProof number, treated as personally identifiable information (PII).</li>
+        <li><strong>Usage Data:</strong> Log data and device information related to your use of the Service.</li>
+      </ul>
+
+      <h2>2. How We Use Your Information</h2>
+      <ul>
+        <li>To provide, operate, and maintain the Service</li>
+        <li>To forward SMS messages to your designated phone number</li>
+        <li>To archive message records and deliver them to your designated email address</li>
+        <li>To comply with applicable laws and regulations</li>
+        <li>To respond to inquiries and provide customer support</li>
+      </ul>
+
+      <h2>3. SMS Data and Client Communications</h2>
+      <p>TxtProof processes SMS message content solely to provide the archiving and forwarding service. Message content is transmitted via Twilio's messaging infrastructure. We do not use message content for marketing or any purpose beyond delivering the Service.</p>
+      <p>Advisors are responsible for obtaining all required consents from their clients prior to SMS communication, including consents required under FINRA, SEC, and TCPA regulations.</p>
+
+      <h2>4. Data Sharing</h2>
+      <p>We do not sell, trade, or rent personal information. We share information only with service providers necessary to operate the Service, including Twilio (SMS infrastructure) and cloud hosting providers. We may disclose information if required by law or legal process.</p>
+
+      <h2>5. Data Retention</h2>
+      <p>Archived message records are delivered to your designated email address. TxtProof retains message logs for a minimum of 6 years to assist with SEC and FINRA recordkeeping requirements, unless otherwise required by law.</p>
+
+      <h2>6. Data Security</h2>
+      <p>We implement industry-standard technical measures to protect your information. All data is transmitted using encrypted connections (TLS/HTTPS).</p>
+
+      <h2>7. Your Rights</h2>
+      <p>You may request access to, correction of, or deletion of your personal information by contacting us below. Certain data may be subject to regulatory retention obligations.</p>
+
+      <h2>8. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. Material changes will be communicated via email. Continued use of the Service constitutes acceptance of the updated policy.</p>
+
+      <h2>9. Contact</h2>
+      <div class="contact-box">
+        <strong>TxtProof — Salveo Capital LLC</strong><br>
+        Email: <a href="mailto:jacob@theharvemail.com">jacob@theharvemail.com</a><br>
+        Website: www.txtproof.com
+      </div>
+    </div>
+    <div class="legal-footer">
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('terms')">Terms & Conditions</a>
+      <span>© 2026 TxtProof — Salveo Capital LLC</span>
+    </div>
+  </div>
+
+  <!-- TERMS -->
+  <div id="page-terms" class="page">
+    <div class="legal-nav">
+      <span class="logo" onclick="showPage('home')">Txt<span>Proof</span></span>
+      <span class="back-link" onclick="showPage('home')">← Back</span>
+    </div>
+    <div class="legal-body">
+      <h1>Terms & Conditions</h1>
+      <p class="meta">Last Updated: March 24, 2026 &nbsp;|&nbsp; Effective Date: March 24, 2026</p>
+
+      <p>These Terms and Conditions ("Terms") govern your use of the TxtProof platform ("Service"), operated by Salveo Capital LLC. By using the Service, you agree to these Terms.</p>
+
+      <h2>1. Description of Service</h2>
+      <p>TxtProof provides an SMS archiving and forwarding platform designed to assist financial advisors in meeting regulatory recordkeeping requirements. The Service assigns users a dedicated phone number, forwards inbound SMS messages to the user's designated mobile number, and delivers archived copies to the user's designated email address.</p>
+
+      <h2>2. Eligibility</h2>
+      <p>The Service is intended for licensed financial professionals. By using the Service, you represent that you are at least 18 years of age and are using it in a professional capacity.</p>
+
+      <h2>3. User Responsibilities</h2>
+      <ul>
+        <li>Ensuring your use complies with all applicable laws and regulations, including FINRA, SEC, and TCPA</li>
+        <li>Obtaining all required consents from clients prior to SMS communications</li>
+        <li>Providing opt-in disclosure to end-users, including message frequency, data rates, and opt-out instructions</li>
+        <li>Maintaining records in accordance with your firm's compliance policies</li>
+        <li>All content transmitted through your TxtProof number</li>
+      </ul>
+
+      <h2>4. Opt-Out and Messaging Requirements</h2>
+      <p>All SMS communications must comply with TCPA and carrier requirements. End-users may opt out at any time by replying STOP. Reply HELP for assistance. Message and data rates may apply.</p>
+
+      <h2>5. Compliance Disclaimer</h2>
+      <p>TxtProof is a recordkeeping tool and does not guarantee compliance with all regulatory requirements applicable to your situation. Consult your compliance officer or legal counsel to confirm the Service meets your specific obligations. TxtProof does not provide legal, compliance, or financial advice.</p>
+
+      <h2>6. Prohibited Uses</h2>
+      <ul>
+        <li>Sending unsolicited commercial messages (spam)</li>
+        <li>Transmitting unlawful, fraudulent, or abusive content</li>
+        <li>Violating any applicable law or regulation</li>
+        <li>Interfering with or disrupting the Service</li>
+        <li>Reselling the Service without prior written consent</li>
+      </ul>
+
+      <h2>7. Disclaimer of Warranties</h2>
+      <p>THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED OR ERROR-FREE.</p>
+
+      <h2>8. Limitation of Liability</h2>
+      <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, SALVEO CAPITAL LLC SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES. OUR TOTAL LIABILITY SHALL NOT EXCEED AMOUNTS PAID BY YOU IN THE THREE MONTHS PRECEDING THE CLAIM.</p>
+
+      <h2>9. Governing Law</h2>
+      <p>These Terms are governed by the laws of the State of Missouri. Disputes shall be subject to the jurisdiction of courts located in Missouri.</p>
+
+      <h2>10. Changes</h2>
+      <p>We may modify these Terms at any time with 30 days' notice to registered users. Continued use constitutes acceptance.</p>
+
+      <h2>11. Contact</h2>
+      <div class="contact-box">
+        <strong>TxtProof — Salveo Capital LLC</strong><br>
+        Email: <a href="mailto:jacob@theharvemail.com">jacob@theharvemail.com</a><br>
+        Website: www.txtproof.com<br><br>
+        <strong>SMS:</strong> Reply STOP to opt out. Reply HELP for help. Msg & data rates may apply.
+      </div>
+    </div>
+    <div class="legal-footer">
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('privacy')">Privacy Policy</a>
+      <span>© 2026 TxtProof — Salveo Capital LLC</span>
+    </div>
+  </div>
+
+  <script>
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + name).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
